@@ -24,7 +24,7 @@ help:
 test:
 	@for t in $(T); do \
 		echo "$$t"; \
-		"./$$t" || exit 1; \
+		"./$$t" --verbose || exit 1; \
 	done
 
 clean:
