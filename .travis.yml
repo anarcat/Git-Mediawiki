@@ -2,6 +2,7 @@ language: perl
 
 env:
   - GIT_ROOT_DIR="$TRAVIS_BUILD_DIR/git"
+  - GITPERLLIB="$TRAVIS_BUILD_DIR"
 
 before_install:
   - sudo apt-get update -q
