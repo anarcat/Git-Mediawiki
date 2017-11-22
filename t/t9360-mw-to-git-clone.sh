@@ -50,6 +50,8 @@ test_expect_success 'Git clone creates the expected git log with multiple files'
 	echo "this must be the same" >>msgDaddy.tmp &&
 	echo "identical too" >msgDj.tmp &&
 	echo "identical" >>msgDj.tmp &&
+        git -C mw_dir_2 ls-files && 
+        git -C mw_dir_2 log --stat &&
 	diff -b mw_dir_2/logDaddy.tmp msgDaddy.tmp &&
 	diff -b mw_dir_2/logDj.tmp msgDj.tmp
 '
