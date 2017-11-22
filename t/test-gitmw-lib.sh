@@ -65,6 +65,50 @@ test_check_precond () {
 	fi
 }
 
+# missing from sharness
+# debugging-friendly alternatives to "test [-f|-d|-e]"
+# The commands test the existence or non-existence of $1. $2 can be
+# given to provide a more precise diagnosis.
+test_path_is_file () {
+	if ! test -f "$1"
+	then
+		echo "File $1 doesn't exist. $2"
+		false
+	fi
+}
+
+test_path_is_dir () {
+	if ! test -d "$1"
+	then
+		echo "Directory $1 doesn't exist. $2"
+		false
+	fi
+}
+
+# Check if the directory exists and is empty as expected, barf otherwise.
+test_dir_is_empty () {
+	test_path_is_dir "$1" &&
+	if test -n "$(ls -a1 "$1" | egrep -v '^\.\.?$')"
+	then
+		echo "Directory '$1' is not empty, it contains:"
+		ls -la "$1"
+		return 1
+	fi
+}
+
+test_path_is_missing () {
+	if test -e "$1"
+	then
+		echo "Path exists:"
+		ls -ld "$1"
+		if test $# -ge 1
+		then
+			echo "$*"
+		fi
+		false
+	fi
+}
+
 # test_diff_directories <dir_git> <dir_wiki>
 #
 # Compare the contents of directories <dir_git> and <dir_wiki> with diff
