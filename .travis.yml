@@ -12,4 +12,4 @@ install:
 script:
   - git config --global user.name travis
   - git config --global user.email git-mediawiki@devnull.travis-ci.org
-  - env EMAIL="git-mediawiki@devnull.travis-ci.org" GITPERLLIB="$TRAVIS_BUILD_DIR" make test
+  - env PERL_PATH=$(which /usr/bin/perl) EMAIL="git-mediawiki@devnull.travis-ci.org" GITPERLLIB="$TRAVIS_BUILD_DIR" make test
